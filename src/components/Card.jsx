@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
+import Popup from "./Popup";
 
 const Card = ({ specData }) => {
   const { id, imageSrc, specsName, description, price } = specData;
   const { increaseCartQuantity } = useShoppingCart();
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleAddToCart = () => {
+    increaseCartQuantity(id);
+    setShowPopup(true); // Show the popup
+  };
 
   return (
     <div>
@@ -17,12 +24,14 @@ const Card = ({ specData }) => {
             <FaRupeeSign />
             {price}
           </p>
-          <button
-            className="btn btn-primary"
-            onClick={() => increaseCartQuantity(id)}
-          >
+          <button className="btn btn-primary" onClick={handleAddToCart}>
             Add to cart
           </button>
+          <Popup
+            message="Item added to cart!"
+            visible={showPopup}
+            onClose={() => setShowPopup(false)} // Hide the popup after timeout
+          />
         </div>
       </div>
     </div>
