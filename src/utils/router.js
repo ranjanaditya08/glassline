@@ -5,6 +5,8 @@ import MenPage from "../components/MenPage";
 import WomenPage from "../components/WomenPage";
 import KidsPage from "../components/KidsPage";
 import Cart from "../components/Cart";
+import SignUp from "../components/SignUp";
+import Login from "../components/Login";
 
 const appRouter = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 {
-  "data" : [
+  "data": [
     {
       "id": 1,
       "categoryId": "kids",
@@ -2700,6 +2700,35 @@
       "description": "contemporary design with a touch of vintage",
       "price": 7324
     }
+  ],
+  "users": [
+    {
+      "id": "842e",
+      "firstName": "aditya",
+      "lastName": "ranjan",
+      "email": "adii@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "be00",
+      "firstName": "user",
+      "lastName": "1",
+      "email": "user1@gmail.com",
+      "password": "user1amiti"
+    },
+    {
+      "id": "7e86",
+      "firstName": "user",
+      "lastName": "2",
+      "email": "user2@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "d4d9",
+      "firstName": "user",
+      "lastName": "3",
+      "email": "user3@gmail.com",
+      "password": "123456"
+    }
   ]
 }
-

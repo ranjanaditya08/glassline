@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
+import { useAuth } from "../utils/AuthContext";
 
 
 const Header = () => {
+  const navigate = useNavigate();  // Initialize useNavigate
+
+  const handleLoginClick = () => {
+    navigate("/login");  // Navigate to the login page
+  };
 
   const {totalCartQuantity} = useShoppingCart();
+  const { isAuthenticated, login, logout } = useAuth();
+
   //console.log(totalCartQuantity);
 
   return (
@@ -68,9 +76,15 @@ const Header = () => {
           </div>
         </div>
 
-        <button className="btn btn-light bg-body-tertiary border-black">
-          Login
-        </button>
+        {isAuthenticated ? (
+          <button className="btn btn-light bg-body-tertiary border-black" onClick={logout}>
+            Logout
+          </button>
+        ) : (
+          <button className="btn btn-light bg-body-tertiary border-black" onClick={handleLoginClick}>
+            Login
+          </button>
+        )}
       </div>
     </nav>
   );
