@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/AuthContext";
 
 const Login = () => {
   const [usersData, setUsersData] = useState([]);  // To store users fetched from the server
@@ -8,6 +9,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");  // For error display
   const navigate = useNavigate()
+  const { login,  } = useAuth();
 
   useEffect(() => {
     fetchData();
@@ -34,6 +36,7 @@ const Login = () => {
     );
 
     if (user) {
+      login()
      navigate("/")
       // Here you can redirect the user or save the logged-in user's info
     } else {
