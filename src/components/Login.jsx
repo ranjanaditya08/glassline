@@ -14,11 +14,11 @@ const Login = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
+  
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const data = await fetch("http://localhost:5000/users");
+      const data = await fetch("http://localhost:8080/Servelets-demo/users");
       const dataJson = await data.json();
       setUsersData(dataJson);
     } catch (error) {

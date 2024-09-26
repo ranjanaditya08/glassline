@@ -47,15 +47,15 @@ const SignUp = () => {
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      console.log("Form submitted successfully:", formValues);
       // Proceed with form submission (API call, etc.)
       postFormData();
+      console.log("Form submitted successfully:", formValues);
 
     }
   };
 
   const postFormData = async () => {
-    const data = await fetch("http://localhost:5000/users",{
+    const data = await fetch("http://localhost:8080/Servelets-demo/users",{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-export const SPECSlIST_URL = "http://localhost:5000/data";
+
 
 export const HOME_BANNER = "https://www.johnjacobseyewear.com/cdn/shop/files/AsSeenOn_Desktop2_1900x.jpg?v=1706704896";
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { SPECSlIST_URL } from "./constants";
 
 
 const useSpecdata = () => {
@@ -10,10 +9,12 @@ const useSpecdata = () => {
         fetchData();
     },[])
 
+    console.log(specsData);
+    
     const fetchData = async () => {
         setIsLoading(true)
         try {
-            const data = await fetch(SPECSlIST_URL);
+            const data = await fetch("http://localhost:8080/Servelets-demo/data");
             const dataJson = await data.json();
             setSpecsData(dataJson);
         } catch (error) {

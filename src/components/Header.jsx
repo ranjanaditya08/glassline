@@ -16,10 +16,9 @@ const Header = () => {
 
   const handleLogoutClick = () => {
     logout();  // Perform logout logic
-    navigate("/");  // Navigate to home or desired page
+    navigate("/login");  // Navigate to home or desired page
   };
 
-  console.log(isAuthenticated);
   
   return (
     <nav className="navbar navbar-light position-sticky top-0 z-3 bg-body-tertiary shadow-lg">
