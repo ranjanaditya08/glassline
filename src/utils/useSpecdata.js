@@ -9,7 +9,7 @@ const useSpecdata = () => {
         fetchData();
     },[])
 
-    console.log(specsData);
+    // console.log(specsData);
     
     const fetchData = async () => {
         setIsLoading(true)

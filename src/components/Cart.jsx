@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import CartCard from "./CartCard";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
-import { BiRupee } from "react-icons/bi";
 import CartShimmer from "./CartShimmer";
 
 const Cart = () => {
