@@ -11,12 +11,12 @@ const Header = () => {
 
   const handleLoginClick = () => {
   
-    navigate("/login");  // Navigate to the login page
+    navigate("/login"); 
   };
 
   const handleLogoutClick = () => {
-    logout();  // Perform logout logic
-    navigate("/login");  // Navigate to home or desired page
+    logout();  
+    navigate("/login");  
   };
 
   
