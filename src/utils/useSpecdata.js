@@ -14,7 +14,7 @@ const useSpecdata = () => {
     const fetchData = async () => {
         setIsLoading(true)
         try {
-            const data = await fetch("http://localhost:8080/Servelets-demo/data");
+            const data = await fetch("http://localhost:8080/data");
             const dataJson = await data.json();
             setSpecsData(dataJson);
         } catch (error) {

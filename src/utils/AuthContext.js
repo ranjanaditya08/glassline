@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-// Create a context for authentication
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -16,5 +16,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use auth context
+
 export const useAuth = () => useContext(AuthContext);

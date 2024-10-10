@@ -4,13 +4,7 @@ import { MEN_BANNER } from "../utils/constants";
 
 const MenPage = () => {
   const { specsData, isLoading } = useSpecdata();
-  // const [menSpecsData, setMenSpecsData] = useState([]);
-
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     setMenSpecsData(specsData.filter((data) => data.categoryId === "men"));
-  //   }
-  // }, [isLoading, specsData]); // Trigger useEffect when `isLoading` or `specsData` changes
+  
 
   const menSpecsData = specsData.filter((data) => data.categoryId === "men")
 

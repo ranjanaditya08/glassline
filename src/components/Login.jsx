@@ -3,44 +3,52 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
 
 const Login = () => {
-  const [usersData, setUsersData] = useState([]);  // To store users fetched from the server
-  const [email, setEmail] = useState("");  // To store entered email
-  const [password, setPassword] = useState("");  // To store entered password
+  const [usersData, setUsersData] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");  // For error display
-  const navigate = useNavigate()
-  const { login,  } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-  
-  const fetchData = async () => {
+
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
+
+    const loginData = { email, password };
+    console.log(loginData);
+    
     try {
-      const data = await fetch("http://localhost:8080/Servelets-demo/users");
-      const dataJson = await data.json();
-      setUsersData(dataJson);
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      
+      if (response.ok) {
+        const dataJson = await response.json();
+
+       console.log(dataJson);
+       
+        if (dataJson.status) {
+          login(); 
+          navigate("/"); 
+        } else {
+          setErrorMessage("Invalid email or password");
+        }
+      } else {
+        setErrorMessage("Failed to log in. Please try again.");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error during login:", error);
+      setErrorMessage("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();  // Prevent form from submitting and refreshing the page
-
-    const user = usersData.find(
-      (user) => user.email === email && user.password === password
-    );
-
-    if (user) {
-      login()
-     navigate("/")
-      // Here you can redirect the user or save the logged-in user's info
-    } else {
-      setErrorMessage("Invalid email or password");
     }
   };
 
@@ -60,7 +68,9 @@ const Login = () => {
                     Please enter your login and password!
                   </p>
 
-                  {errorMessage && <p className="text-danger">{errorMessage}</p>}
+                  {errorMessage && (
+                    <p className="text-danger">{errorMessage}</p>
+                  )}
 
                   <form onSubmit={handleLogin}>
                     <div className="form-outline form-white mb-4">
@@ -69,7 +79,7 @@ const Login = () => {
                         id="typeEmailX"
                         className="form-control form-control-lg"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}  // Update email state
+                        onChange={(e) => setEmail(e.target.value)} 
                         required
                       />
                       <label className="form-label" htmlFor="typeEmailX">
@@ -83,7 +93,7 @@ const Login = () => {
                         id="typePasswordX"
                         className="form-control form-control-lg"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}  // Update password state
+                        onChange={(e) => setPassword(e.target.value)} 
                         required
                       />
                       <label className="form-label" htmlFor="typePasswordX">
@@ -94,7 +104,7 @@ const Login = () => {
                     <button
                       className="btn bg-primary btn-outline-light btn-lg px-5"
                       type="submit"
-                      disabled={isLoading}  // Disable button when data is loading
+                      disabled={isLoading} 
                     >
                       {isLoading ? "Loading..." : "Login"}
                     </button>
