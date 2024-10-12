@@ -1,22 +1,21 @@
-import React, { useMemo } from "react";
 import CartCard from "./CartCard";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
 import CartShimmer from "./CartShimmer";
+import { useEffect } from "react";
+import { useAuth } from "../utils/AuthContext";
 
 const Cart = () => {
-  const { cartItems, specsData, totalCartQuantity } = useShoppingCart();
+  const {user, isAuthenticated} = useAuth()
+  const { userCartData, isLoading, totalCartQuantity, getCartItems } =
+    useShoppingCart();
+
+  useEffect(() => {
+    user.id && getCartItems();
+  }, [user.id, isAuthenticated]);
 
   const quantity = totalCartQuantity();
 
-  const cartData = useMemo(
-    () =>
-      specsData.filter((item) =>
-        cartItems.some((cartItem) => cartItem.id === item.id)
-      ),
-    [cartItems, specsData]
-  );
-
-  return quantity === 0 ? (
+  return userCartData.length === 0 && quantity === 0 ? (
     <CartShimmer />
   ) : (
     <section className="h-100">
@@ -27,9 +26,10 @@ const Cart = () => {
               <h3 className="fw-normal mb-0">Shopping Cart</h3>
             </div>
 
-            {cartData.map((data) => (
-              <CartCard data={data} key={data.id} />
-            ))}
+            {!isLoading &&
+              userCartData.map((item,idx) => (
+                <CartCard data={item} key={`${item?.product.id}${idx}`} />
+              ))}
 
             <div className="card">
               <div className="card-body">

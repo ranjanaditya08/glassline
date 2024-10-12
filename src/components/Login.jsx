@@ -11,15 +11,13 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     const loginData = { email, password };
-    console.log(loginData);
-    
+    //console.log(loginData);
+  
     try {
       const response = await fetch("http://localhost:8080/login", {
         method: "POST",
@@ -28,14 +26,17 @@ const Login = () => {
         },
         body: JSON.stringify(loginData),
       });
-
-      
+  
       if (response.ok) {
         const dataJson = await response.json();
-
-       console.log(dataJson);
-       
+        console.log(dataJson);
+  
         if (dataJson.status) {
+          const { token, userDto } = dataJson.data;
+  
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(userDto));
+  
           login(); 
           navigate("/"); 
         } else {
@@ -51,6 +52,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <section className="vh-100">

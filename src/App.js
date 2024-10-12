@@ -8,14 +8,14 @@ import { AuthProvider } from "./utils/AuthContext";
 
 function App() {
   return (
-    <ShoppingCartProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <ShoppingCartProvider>
         <div className="App">
           <Header />
           <Outlet />
         </div>
-      </AuthProvider>
-    </ShoppingCartProvider>
+      </ShoppingCartProvider>
+    </AuthProvider>
   );
 }
 

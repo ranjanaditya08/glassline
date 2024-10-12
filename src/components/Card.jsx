@@ -2,15 +2,27 @@ import React, { useState } from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
 import Popup from "./Popup";
+import { useAuth } from "../utils/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ specData }) => {
-  const { id, imageSrc, specsName, description, price } = specData;
-  const { increaseCartQuantity } = useShoppingCart();
+  const { imageSrc, specsName, description, price } = specData;
+  const { increaseCartQuantity, isLoading } = useShoppingCart();
   const [showPopup, setShowPopup] = useState(false);
+  const { isAuthenticated } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    increaseCartQuantity(id);
-    setShowPopup(true); // Show the popup
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      increaseCartQuantity({
+        product: specData,
+        quantity: 1,
+      });
+      setShowPopup(true);
+    }
   };
 
   return (
@@ -24,7 +36,11 @@ const Card = ({ specData }) => {
             <FaRupeeSign />
             {price}
           </p>
-          <button className="btn btn-primary" onClick={handleAddToCart}>
+          <button
+            className="btn btn-primary"
+            onClick={handleAddToCart}
+            disabled={isLoading}
+          >
             Add to cart
           </button>
           <Popup

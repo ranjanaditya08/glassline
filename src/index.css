@@ -36,3 +36,18 @@ code {
   width: 50px;
 }
 
+.user {
+  font-weight: bold; /* Make the username bold */
+  font-size: 1rem; /* Adjust font size */
+  padding: 8px 12px; /* Add padding for better clickability */
+  border: 1px solid transparent; /* Make border transparent initially */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+}
+
+.user:hover {
+  background-color: rgba(90, 95, 100, 0.1); /* Light blue background on hover */
+  border-color: rgba(152, 182, 212, 0.3); /* Blue border on hover */
+}
+
+

@@ -7,11 +7,13 @@ import KidsPage from "../components/KidsPage";
 import Cart from "../components/Cart";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
+import ErrorPage from "../components/ErrorPage";
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

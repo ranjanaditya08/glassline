@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
 import { useAuth } from "../utils/AuthContext";
+import { CiUser } from "react-icons/ci";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { totalCartQuantity } = useShoppingCart();
-  const { isAuthenticated, login, logout } = useAuth();
+  const { totalCartQuantity, clearCart, getCartItems } = useShoppingCart();
+  const { isAuthenticated, login, logout, user } = useAuth();
 
   const handleLoginClick = () => {
-  
-    navigate("/login"); 
+    login();
+    navigate("/login");
   };
 
   const handleLogoutClick = () => {
-    logout();  
-    navigate("/login");  
+    clearCart();
+    logout();
+    navigate("/login");
   };
 
-  
+  useEffect(() => {
+    user.id && getCartItems();
+  }, [user.id, isAuthenticated]);
+
   return (
     <nav className="navbar navbar-light position-sticky top-0 z-3 bg-body-tertiary shadow-lg">
       <div className="container-fluid d-flex justify-content-between align-items-center">
@@ -31,7 +36,11 @@ const Header = () => {
         <div className="d-flex justify-content-center flex-grow-1">
           <ul className="navbar-nav d-flex flex-row gap-3 custom-font-weight">
             <li className="nav-item">
-              <Link className="nav-link active text-danger" aria-current="page" to="/">
+              <Link
+                className="nav-link active text-danger"
+                aria-current="page"
+                to="/"
+              >
                 HOME
               </Link>
             </li>
@@ -74,11 +83,24 @@ const Header = () => {
         </div>
 
         {isAuthenticated ? (
-          <button className="btn btn-light bg-body-tertiary border-black" onClick={handleLogoutClick}>
-            Logout
-          </button>
+          <>
+            <button className="user mx-1">
+              {user?.firstName}
+              <CiUser />
+              {/*<MdOutlineAdminPanelSettings />*/}
+            </button>
+            <button
+              className="btn btn-light bg-body-tertiary border-black"
+              onClick={handleLogoutClick}
+            >
+              Logout
+            </button>
+          </>
         ) : (
-          <button className="btn btn-light bg-body-tertiary border-black" onClick={handleLoginClick}>
+          <button
+            className="btn btn-light bg-body-tertiary border-black"
+            onClick={handleLoginClick}
+          >
             Login
           </button>
         )}
