@@ -16,7 +16,7 @@ export function ShoppingCartProvider({ children }) {
 
   const getCartItems = async () => {
     const token = localStorage.getItem("token");
-    console.log(user);
+    //console.log(user);
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -150,6 +150,12 @@ export function ShoppingCartProvider({ children }) {
     setUserCartData([]);
   }
 
+  function totalCartValue() {
+    return userCartData.reduce((acc, item) => acc + parseInt(item.product.price) * item.quantity, 0);
+  }
+
+  
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -160,6 +166,7 @@ export function ShoppingCartProvider({ children }) {
         totalCartQuantity,
         clearCart,
         getCartItems,
+        totalCartValue,
         userCartData,
         isLoading,
       }}

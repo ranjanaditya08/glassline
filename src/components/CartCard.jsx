@@ -45,7 +45,7 @@ const CartCard = ({ data }) => {
                 e.target.value > 0
                   ? increaseCartQuantity(data)
                   : decreaseCartQuantity(data)
-              } // Adjusts quantity when input is changed
+              } 
               readOnly
             />
 

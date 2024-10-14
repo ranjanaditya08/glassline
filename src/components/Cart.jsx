@@ -5,9 +5,14 @@ import { useEffect } from "react";
 import { useAuth } from "../utils/AuthContext";
 
 const Cart = () => {
-  const {user, isAuthenticated} = useAuth()
-  const { userCartData, isLoading, totalCartQuantity, getCartItems } =
-    useShoppingCart();
+  const { user, isAuthenticated } = useAuth();
+  const {
+    userCartData,
+    isLoading,
+    totalCartQuantity,
+    getCartItems,
+    totalCartValue,
+  } = useShoppingCart();
 
   useEffect(() => {
     user.id && getCartItems();
@@ -27,9 +32,18 @@ const Cart = () => {
             </div>
 
             {!isLoading &&
-              userCartData.map((item,idx) => (
+              userCartData.map((item, idx) => (
                 <CartCard data={item} key={`${item?.product.id}${idx}`} />
               ))}
+
+            <div className="card">
+              <div className="card-body">
+              <p className="mb-0 me-5 d-flex align-items-center float-end">
+                <span className="small text-muted me-2">Order total:</span>
+                <span className="lead fw-normal">₹{totalCartValue()}</span>
+              </p>
+              </div>
+            </div>
 
             <div className="card">
               <div className="card-body">
