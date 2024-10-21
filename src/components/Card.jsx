@@ -39,7 +39,7 @@ const Card = ({ specData }) => {
           <button
             className="btn btn-primary"
             onClick={handleAddToCart}
-            disabled={isLoading}
+            
           >
             Add to cart
           </button>

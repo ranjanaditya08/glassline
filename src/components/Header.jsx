@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
 import { useAuth } from "../utils/AuthContext";
 import { CiUser } from "react-icons/ci";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 const Header = () => {
   const navigate = useNavigate();
   const { totalCartQuantity, clearCart, getCartItems } = useShoppingCart();
-  const { isAuthenticated, login, logout, user } = useAuth();
+  const { isAuthenticated, login, logout, user, role } = useAuth();
 
   const handleLoginClick = () => {
     login();
@@ -19,6 +20,12 @@ const Header = () => {
     clearCart();
     logout();
     navigate("/login");
+  };
+
+  const handleAdminPage = () => {
+    if (isAuthenticated && role === 'SELLER') {
+      navigate("/admin");
+    }
   };
 
   useEffect(() => {
@@ -84,10 +91,9 @@ const Header = () => {
 
         {isAuthenticated ? (
           <>
-            <button className="user mx-1">
+            <button className="user mx-1 text-center" onClick={handleAdminPage}>
               {user?.firstName}
-              <CiUser />
-              {/*<MdOutlineAdminPanelSettings />*/}
+              {role === 'USER' ? <CiUser /> : <MdOutlineAdminPanelSettings color="blue" className="fs-4"/>}
             </button>
             <button
               className="btn btn-light bg-body-tertiary border-black"

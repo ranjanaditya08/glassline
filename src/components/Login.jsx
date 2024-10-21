@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
+import { BiHide, BiShow } from "react-icons/bi";
 
 const Login = () => {
-  const [usersData, setUsersData] = useState([]);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -14,10 +16,10 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-  
+
     const loginData = { email, password };
     //console.log(loginData);
-  
+
     try {
       const response = await fetch("http://localhost:8080/login", {
         method: "POST",
@@ -26,19 +28,19 @@ const Login = () => {
         },
         body: JSON.stringify(loginData),
       });
-  
+
       if (response.ok) {
         const dataJson = await response.json();
         console.log(dataJson);
-  
+
         if (dataJson.status) {
           const { token, userDto } = dataJson.data;
-  
+
           localStorage.setItem("token", token);
           localStorage.setItem("user", JSON.stringify(userDto));
-  
-          login(); 
-          navigate("/"); 
+
+          login();
+          navigate("/");
         } else {
           setErrorMessage("Invalid email or password");
         }
@@ -52,7 +54,6 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-  
 
   return (
     <section className="vh-100">
@@ -81,7 +82,7 @@ const Login = () => {
                         id="typeEmailX"
                         className="form-control form-control-lg"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)} 
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                       />
                       <label className="form-label" htmlFor="typeEmailX">
@@ -89,15 +90,23 @@ const Login = () => {
                       </label>
                     </div>
 
-                    <div className="form-outline form-white mb-4">
+                    <div className="form-outline form-white mb-4 position-relative">
                       <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="typePasswordX"
                         className="form-control form-control-lg"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)} 
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                       />
+                      <span
+                        className="position-absolute end-0 translate-middle-y pe-3 showPassword"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <BiHide /> : <BiShow />}
+                      </span>
+
                       <label className="form-label" htmlFor="typePasswordX">
                         Password
                       </label>
@@ -106,7 +115,7 @@ const Login = () => {
                     <button
                       className="btn bg-primary btn-outline-light btn-lg px-5"
                       type="submit"
-                      disabled={isLoading} 
+                      disabled={isLoading}
                     >
                       {isLoading ? "Loading..." : "Login"}
                     </button>

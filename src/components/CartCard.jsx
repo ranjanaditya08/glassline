@@ -41,11 +41,6 @@ const CartCard = ({ data }) => {
               className="form-control form-control-sm"
               min="0"
               value={data.quantity}
-              onChange={(e) =>
-                e.target.value > 0
-                  ? increaseCartQuantity(data)
-                  : decreaseCartQuantity(data)
-              } 
               readOnly
             />
 

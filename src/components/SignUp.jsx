@@ -7,6 +7,7 @@ const SignUp = () => {
     lastName: "",
     email: "",
     password: "",
+    role: "USER",  // Default role
   });
 
   const [userCreated, setUserCreated] = useState({});
@@ -38,6 +39,9 @@ const SignUp = () => {
       errors.password = "Password is required.";
     } else if (formValues.password.length < 6) {
       errors.password = "Password must be at least 6 characters.";
+    }
+    if (!formValues.role) {
+      errors.role = "Role selection is required.";
     }
 
     return errors;
@@ -184,6 +188,24 @@ const SignUp = () => {
                       <div className="invalid-feedback">
                         {formErrors.password}
                       </div>
+                    )}
+                  </div>
+
+                  <div className="form-outline mb-4">
+                    <label>Select Role:</label>
+                    <select
+                      name="role"
+                      onChange={handleInputChange}
+                      value={formValues.role}
+                      className={`form-control ${
+                        formErrors.role ? "is-invalid" : ""
+                      }`}
+                    >
+                      <option value="USER">User</option>
+                      <option value="SELLER">Seller</option>
+                    </select>
+                    {formErrors.role && (
+                      <div className="invalid-feedback">{formErrors.role}</div>
                     )}
                   </div>
 

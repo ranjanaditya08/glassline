@@ -1,7 +1,9 @@
 import React from "react";
 import "../cartShimmer.css"
 
+
 const CartShimmer = () => {
+
   return (
     <div className="container-fluid cartShimmer mt-5">
       <div className="row">

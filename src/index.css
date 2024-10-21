@@ -46,8 +46,12 @@ code {
 }
 
 .user:hover {
-  background-color: rgba(90, 95, 100, 0.1); /* Light blue background on hover */
-  border-color: rgba(152, 182, 212, 0.3); /* Blue border on hover */
+  background-color: rgba(90, 95, 100, 0.1); 
+  border-color: rgba(152, 182, 212, 0.3); 
+}
+
+.showPassword {
+  top: 30px;
 }
 
 

@@ -8,6 +8,7 @@ import Cart from "../components/Cart";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import ErrorPage from "../components/ErrorPage";
+import AdminPage from "../components/AdminPage";
 
 const appRouter = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/admin",
+        element: <AdminPage />,
       },
     ],
   },
