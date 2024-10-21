@@ -11,18 +11,29 @@ const useSpecdata = () => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/data", {
+      
+      const responseAdmin = await fetch("http://localhost:8080/products", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      if (response.ok) {
-        const dataJson = await response.json();
-        setSpecsData(dataJson);
+      const responseSpecs = await fetch("http://localhost:8080/data", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (responseAdmin.ok && responseSpecs.ok) {
+        const adminData = await responseAdmin.json();
+        const specsData = await responseSpecs.json();
+
+        const mergedData = [...adminData, ...specsData];
+        setSpecsData(mergedData);
       } else {
-        console.error("Failed to fetch data. Status:", response.status);
+        console.error("Failed to fetch data. Admin status:", responseAdmin.status, "Specs status:", responseSpecs.status);
       }
     } catch (error) {
       console.error("Error fetching data:", error);

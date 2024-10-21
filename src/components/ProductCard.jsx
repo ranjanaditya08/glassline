@@ -5,7 +5,7 @@ import { useAdminContext } from "../utils/AdminContext";
 
 const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
   const { deleteProduct } = useAdminContext();
-  const { id, imageLink, specName, description, price, quantity } = product;
+  const { id, imageSrc, specsName, description, price, quantity } = product;
 
   const onEditProductClick=()=>{
     setSelectedProduct(product); 
@@ -16,14 +16,14 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
     <div className="card p-2" style={{ width: "16rem", height: "fit-content" }}>
       <div className="card-img-container">
         <img
-          src={imageLink || "https://via.placeholder.com/150"}
+          src={imageSrc || "https://via.placeholder.com/150"}
           className="card-img-top"
-          alt={specName || "Product Image"}
+          alt={specsName || "Product Image"}
           style={{ height: "150px", objectFit: "cover" }}
         />
       </div>
       <div className="card-body p-2">
-        <h5 className="card-title">{specName}</h5>
+        <h5 className="card-title">{specsName}</h5>
         <p className="card-text " style={{ fontSize: "0.9rem" }}>
           {description}
         </p>

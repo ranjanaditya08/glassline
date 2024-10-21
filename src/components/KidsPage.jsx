@@ -5,15 +5,15 @@ import { KIDS_BANNER } from "../utils/constants";
 const KidsPage = () => {
   const { specsData, isLoading } = useSpecdata();
 
-  const kidsSpecsData = specsData.filter((data) => data.categoryId === "kids")
+  const kidsSpecsData = specsData.filter((data) => data.categoryId === "kids" || data.categoryId === "kid")
 
   return (
     <div>
       <img src={KIDS_BANNER} alt="banner" className="banner" />
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 mt-2">
         {!isLoading &&
-          kidsSpecsData.map((specData) => (
-            <div className="col" key={specData.id}>
+          kidsSpecsData.map((specData,idx) => (
+            <div className="col" key={`${specData?.id}${idx}`}>
               <Card specData={specData} />
             </div>
           ))}
