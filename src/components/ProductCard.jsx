@@ -7,10 +7,10 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
   const { deleteProduct } = useAdminContext();
   const { id, imageSrc, specsName, description, price, quantity } = product;
 
-  const onEditProductClick=()=>{
-    setSelectedProduct(product); 
+  const onEditProductClick = () => {
+    setSelectedProduct(product);
     setShowModal(true);
-  }
+  };
 
   return (
     <div className="card p-2" style={{ width: "16rem", height: "fit-content" }}>
@@ -23,8 +23,8 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
         />
       </div>
       <div className="card-body p-2">
-        <h5 className="card-title">{specsName}</h5>
-        <p className="card-text " style={{ fontSize: "0.9rem" }}>
+        <h5 className="card-title text-truncate">{specsName}</h5>
+        <p className="card-text text-truncate" style={{ fontSize: "0.9rem" }}>
           {description}
         </p>
         <p className="card-text">

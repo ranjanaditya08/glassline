@@ -1,17 +1,16 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
-
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -20,38 +19,43 @@ code {
 }
 
 .custom-font-weight {
-  font-weight: 600; /* You can set any font-weight value here */
+  font-weight: 600; 
 }
 
-.banner{
+.banner {
   max-width: 100%;
   height: auto;
 }
 
-.card{
+.card {
   cursor: pointer;
 }
 
-#logo{
+#logo {
   width: 50px;
 }
 
 .user {
-  font-weight: bold; /* Make the username bold */
-  font-size: 1rem; /* Adjust font size */
-  padding: 8px 12px; /* Add padding for better clickability */
-  border: 1px solid transparent; /* Make border transparent initially */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+  font-weight: bold; 
+  font-size: 1rem; 
+  padding: 8px 12px; 
+  border: 1px solid transparent; 
+  border-radius: 5px; 
+  transition: background-color 0.3s, border-color 0.3s; 
 }
 
 .user:hover {
-  background-color: rgba(90, 95, 100, 0.1); 
-  border-color: rgba(152, 182, 212, 0.3); 
+  background-color: rgba(90, 95, 100, 0.1);
+  border-color: rgba(152, 182, 212, 0.3);
 }
 
 .showPassword {
   top: 30px;
+}
+
+
+.addToCart:hover{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 

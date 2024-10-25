@@ -1,7 +1,7 @@
 import CartCard from "./CartCard";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
 import CartShimmer from "./CartShimmer";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAuth } from "../utils/AuthContext";
 
 const Cart = () => {
@@ -14,9 +14,21 @@ const Cart = () => {
     totalCartValue,
   } = useShoppingCart();
 
+  const scrollPosition = useRef(0);
+
   useEffect(() => {
     user.id && getCartItems();
   }, [user.id, isAuthenticated]);
+
+  const handleScroll = () => {
+    scrollPosition.current = window.scrollY;
+  };
+
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo(0, scrollPosition.current);
+    }
+  },[isLoading]);
 
   const quantity = totalCartQuantity();
 
@@ -33,15 +45,19 @@ const Cart = () => {
 
             {!isLoading &&
               userCartData.map((item, idx) => (
-                <CartCard data={item} key={`${item?.product.id}${idx}`} />
+                <CartCard
+                  data={item}
+                  key={`${item?.product.id}${idx}`}
+                  handleScroll={handleScroll}
+                />
               ))}
 
             <div className="card">
               <div className="card-body">
-              <p className="mb-0 me-5 d-flex align-items-center float-end">
-                <span className="small text-muted me-2">Order total:</span>
-                <span className="lead fw-normal">₹{totalCartValue()}</span>
-              </p>
+                <p className="mb-0 me-5 d-flex align-items-center float-end">
+                  <span className="small text-muted me-2">Order total:</span>
+                  <span className="lead fw-normal">₹{totalCartValue()}</span>
+                </p>
               </div>
             </div>
 

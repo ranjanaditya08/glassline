@@ -7,7 +7,7 @@ const SignUp = () => {
     lastName: "",
     email: "",
     password: "",
-    role: "USER",  // Default role
+    role: "USER", 
   });
 
   const [userCreated, setUserCreated] = useState({});

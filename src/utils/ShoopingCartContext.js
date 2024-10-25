@@ -151,10 +151,11 @@ export function ShoppingCartProvider({ children }) {
   }
 
   function totalCartValue() {
-    return userCartData.reduce((acc, item) => acc + parseInt(item.product.price) * item.quantity, 0);
+    return userCartData.reduce(
+      (acc, item) => acc + parseInt(item.product.price) * item.quantity,
+      0
+    );
   }
-
-  
 
   return (
     <ShoppingCartContext.Provider

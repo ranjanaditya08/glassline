@@ -26,11 +26,22 @@ const Card = ({ specData }) => {
   };
 
   return (
-    <div className="card mb-4" style={{ width: "18rem", height: "100%" }}>
-      <img src={imageSrc} className="card-img-top" alt={specsName} style={{ height: "150px", objectFit: "cover" }} />
+    <div className="card mb-4 p-2 addToCart" style={{ width: "18rem", height: "fit-content" }}>
+      <img
+        src={imageSrc}
+        className="card-img-top"
+        alt={specsName}
+        style={{ height: "150px", objectFit: "cover" }}
+      />
       <div className="card-body d-flex flex-column">
-        <h5 className="card-title mb-2" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{specsName}</h5>
-        <p className="card-text flex-grow-1" style={{ overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: "3" }}>
+        <h5
+          className="card-title mb-2 text-truncate"
+        >
+          {specsName}
+        </h5>
+        <p
+          className="card-text flex-grow-1 text-truncate"
+        >
           {description}
         </p>
         <p className="card-text">
@@ -41,7 +52,11 @@ const Card = ({ specData }) => {
           Add to cart
         </button>
       </div>
-      <Popup message="Item added to cart!" visible={showPopup} onClose={() => setShowPopup(false)} />
+      <Popup
+        message="Item added to cart!"
+        visible={showPopup}
+        onClose={() => setShowPopup(false)}
+      />
     </div>
   );
 };

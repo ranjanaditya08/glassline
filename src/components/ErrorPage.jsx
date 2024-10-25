@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
@@ -13,7 +13,7 @@ const ErrorPage = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ErrorPage
+export default ErrorPage;

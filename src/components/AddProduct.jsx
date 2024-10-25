@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useAdminContext } from "../utils/AdminContext";
 
-function AddProduct({showModal, setShowModal, selectedProduct}) {
-  const { addProduct , editProduct} = useAdminContext();
-  
+function AddProduct({ showModal, setShowModal, selectedProduct }) {
+  const { addProduct, editProduct } = useAdminContext();
+
   const [glassData, setGlassData] = useState({
     specName: "",
     category: "men", // default to men
@@ -14,11 +14,10 @@ function AddProduct({showModal, setShowModal, selectedProduct}) {
     quantity: 0,
     type: "",
   });
-  
+
   const [formErrors, setFormErrors] = useState({});
 
- // console.log(glassData);
-  
+  // console.log(glassData);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,29 +29,29 @@ function AddProduct({showModal, setShowModal, selectedProduct}) {
 
   const validate = () => {
     const errors = {};
-    
+
     if (!glassData.specName.trim()) {
       errors.specName = "Glass Name is required";
     }
-    
+
     if (!glassData.imageLink.trim()) {
       errors.imageLink = "Image Link is required";
     }
-    
+
     if (!glassData.price) {
       errors.price = "Price is required";
     } else if (glassData.price <= 0) {
       errors.price = "Price must be a positive number";
     }
-    
+
     if (!glassData.description.trim()) {
       errors.description = "Description is required";
     }
-    
+
     if (glassData.quantity < 0) {
       errors.quantity = "Quantity cannot be negative";
     }
-    
+
     if (!glassData.type.trim()) {
       errors.type = "Type is required";
     }
@@ -63,10 +62,10 @@ function AddProduct({showModal, setShowModal, selectedProduct}) {
   useEffect(() => {
     if (selectedProduct) {
       setGlassData({
-        id:selectedProduct.id,
-        specName: selectedProduct.specName,
+        id: selectedProduct.id,
+        specName: selectedProduct.specsName,
         category: selectedProduct.category,
-        imageLink: selectedProduct.imageLink,
+        imageLink: selectedProduct.imageSrc,
         price: selectedProduct.price,
         description: selectedProduct.description,
         quantity: selectedProduct.quantity,
@@ -77,19 +76,19 @@ function AddProduct({showModal, setShowModal, selectedProduct}) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    
+
     const errors = validate();
     setFormErrors(errors);
-    
+
     if (Object.keys(errors).length === 0) {
       if (selectedProduct) {
-        editProduct(glassData)
+        editProduct(glassData);
       } else {
         addProduct(glassData);
       }
-  
+
       handleClose();
-      resetForm(); 
+      resetForm();
     }
   };
 

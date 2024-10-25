@@ -3,15 +3,20 @@ import { BiMinus, BiPlus } from "react-icons/bi";
 import { FiDelete } from "react-icons/fi";
 import { useShoppingCart } from "../utils/ShoopingCartContext";
 
-const CartCard = ({ data }) => {
+const CartCard = ({ data, handleScroll }) => {
   const { imageSrc, specsName, description, price } = data.product;
-  const {
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    deleteCartItem,
-  } = useShoppingCart();
-  
+  const { increaseCartQuantity, decreaseCartQuantity, deleteCartItem } =
+    useShoppingCart();
 
+  const handleIncrease = () => {
+    handleScroll();
+    increaseCartQuantity(data)
+  }
+
+  const handleDecrease = () => {
+    handleScroll();
+    decreaseCartQuantity(data)
+  }
 
   return (
     <div className="card rounded-3 mb-4">
@@ -31,7 +36,7 @@ const CartCard = ({ data }) => {
           <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
             <button
               className="btn btn-link px-2"
-              onClick={() => decreaseCartQuantity(data)}
+              onClick={handleDecrease}
             >
               <BiMinus />
             </button>
@@ -46,17 +51,20 @@ const CartCard = ({ data }) => {
 
             <button
               className="btn btn-link px-2"
-              onClick={() => increaseCartQuantity(data)}
+              onClick={handleIncrease}
             >
               <BiPlus />
             </button>
           </div>
           <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-            <h5 className="mb-0">₹{price}</h5> 
+            <h5 className="mb-0">₹{price}</h5>
           </div>
           <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-            <button onClick={() => deleteCartItem(data)} className="btn btn-link">
-              <FiDelete className="fs-3" color="red"/>
+            <button
+              onClick={() => deleteCartItem(data)}
+              className="btn btn-link"
+            >
+              <FiDelete className="fs-3" color="red" />
             </button>
           </div>
         </div>

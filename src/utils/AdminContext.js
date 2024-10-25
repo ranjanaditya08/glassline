@@ -8,7 +8,6 @@ export const AdminCartProvider = ({ children }) => {
   const [productCartData, setProductCartData] = useState([]);
 
   const addProduct = async (product) => {
-    
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
@@ -33,10 +32,9 @@ export const AdminCartProvider = ({ children }) => {
     }
   };
 
-  const editProduct =  (product) => {
-    
+  const editProduct = (product) => {
     try {
-       addProduct(product);
+      addProduct(product);
     } catch (error) {
       console.error("Error editing product:", error);
     }
@@ -91,7 +89,13 @@ export const AdminCartProvider = ({ children }) => {
 
   return (
     <AdminContext.Provider
-      value={{ productCartData, addProduct, editProduct, deleteProduct, getAllProduct }}
+      value={{
+        productCartData,
+        addProduct,
+        editProduct,
+        deleteProduct,
+        getAllProduct,
+      }}
     >
       {children}
     </AdminContext.Provider>

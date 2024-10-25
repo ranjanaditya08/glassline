@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   const handleAdminPage = () => {
-    if (isAuthenticated && role === 'SELLER') {
+    if (isAuthenticated && role === "SELLER") {
       navigate("/admin");
     }
   };
@@ -93,7 +93,11 @@ const Header = () => {
           <>
             <button className="user mx-1 text-center" onClick={handleAdminPage}>
               {user?.firstName}
-              {role === 'USER' ? <CiUser /> : <MdOutlineAdminPanelSettings color="blue" className="fs-4"/>}
+              {role === "USER" ? (
+                <CiUser />
+              ) : (
+                <MdOutlineAdminPanelSettings color="blue" className="fs-4" />
+              )}
             </button>
             <button
               className="btn btn-light bg-body-tertiary border-black"

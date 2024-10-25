@@ -24,10 +24,17 @@ const AdminPage = () => {
         setShowModal={setShowModal}
         selectedProduct={selectedProduct}
       />
-  
+
       <div className="product-list">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 mt-2">
-          {productCartData.length !== 0 &&
+          {productCartData.length === 0 ? (
+            <div className="d-flex justify-content-center align-items-center w-100">
+              <div className="alert alert-warning text-center" role="alert">
+                <h4 className="alert-heading">No Products Available</h4>
+                <p>Please add some products to get started.</p>
+              </div>
+            </div>
+          ) : (
             productCartData.map((specData, idx) => (
               <div className="col" key={`${specData?.id}${idx}`}>
                 <ProductCard
@@ -37,7 +44,8 @@ const AdminPage = () => {
                   setSelectedProduct={setSelectedProduct}
                 />
               </div>
-            ))}
+            ))
+          )}
         </div>
       </div>
     </div>

@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 const Popup = ({ message, visible, onClose }) => {
   useEffect(() => {
     if (visible) {
-      const timer = setTimeout(onClose, 1000); 
-      return () => clearTimeout(timer); 
+      const timer = setTimeout(onClose, 1000);
+      return () => clearTimeout(timer);
     }
   }, [visible, onClose]);
 
-  if (!visible) return null; 
+  if (!visible) return null;
 
   return (
     <div

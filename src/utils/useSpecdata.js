@@ -11,7 +11,6 @@ const useSpecdata = () => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      
       const responseAdmin = await fetch("http://localhost:8080/products", {
         method: "GET",
         headers: {
@@ -33,7 +32,12 @@ const useSpecdata = () => {
         const mergedData = [...adminData, ...specsData];
         setSpecsData(mergedData);
       } else {
-        console.error("Failed to fetch data. Admin status:", responseAdmin.status, "Specs status:", responseSpecs.status);
+        console.error(
+          "Failed to fetch data. Admin status:",
+          responseAdmin.status,
+          "Specs status:",
+          responseSpecs.status
+        );
       }
     } catch (error) {
       console.error("Error fetching data:", error);
